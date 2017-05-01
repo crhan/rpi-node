@@ -1,5 +1,9 @@
 FROM hypriot/rpi-alpine:3.5
 
+ENV QEMU_EXECVE 1
+COPY https://github.com/resin-io-projects/armv7hf-debian-qemu/archive/master.zip /usr/bin/
+RUN [ "qemu-arm-static", "/bin/sh", "-c", "ln -s resin-xbuild /usr/bin/cross-build-start; ln -s resin-xbuild /usr/bin/cross-build-end; ln /bin/sh /bin/sh.real" ]
+
 ENV NPM_CONFIG_LOGLEVEL info
 ENV NODE_VERSION 4.8.0
 

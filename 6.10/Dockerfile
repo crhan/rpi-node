@@ -1,5 +1,9 @@
 FROM resin/rpi-raspbian:jessie
 
+ENV QEMU_EXECVE 1
+COPY https://github.com/resin-io-projects/armv7hf-debian-qemu/archive/master.zip /usr/bin/
+RUN [ "qemu-arm-static", "/bin/sh", "-c", "ln -s resin-xbuild /usr/bin/cross-build-start; ln -s resin-xbuild /usr/bin/cross-build-end; ln /bin/sh /bin/sh.real" ]
+
 # Install common build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     ca-certificates \
