@@ -1,7 +1,6 @@
-FROM resin/rpi-raspbian:jessie
+FROM jsurf/rpi-raspbian
 
-ENV QEMU_EXECVE 1
-ADD arm-cross-build.tgz /usr/bin
+RUN [ "cross-build-start" ]
 
 # Install common build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -93,5 +92,7 @@ RUN set -ex \
   && rm yarn.js.asc \
   && mv yarn.js /usr/local/bin/yarn \
   && chmod +x /usr/local/bin/yarn
+
+RUN [ "cross-build-end" ]
 
 CMD [ "node" ]
