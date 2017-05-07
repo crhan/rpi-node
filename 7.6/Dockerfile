@@ -1,8 +1,7 @@
 FROM resin/rpi-raspbian:jessie
 
 ENV QEMU_EXECVE 1
-ADD https://github.com/resin-io-projects/armv7hf-debian-qemu/archive/master.zip /usr/bin/
-RUN [ "qemu-arm-static", "/bin/sh", "-c", "ln -s resin-xbuild /usr/bin/cross-build-start; ln -s resin-xbuild /usr/bin/cross-build-end; ln /bin/sh /bin/sh.real" ]
+ADD arm-cross-build.tgz /usr/bin
 
 
 # Install common build dependencies
